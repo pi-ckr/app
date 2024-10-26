@@ -15,20 +15,20 @@ struct OnboardSecond: View {
                     Image("logo")
                     VStack(spacing: 0) {
                         Text("매일 매일 채워가는")
-                            .typography(.heading, color: ColorPalette.Content.Primary)
+                            .typography(.heading, color: .content.primary)
                         HStack(spacing: 0) {
                             Text("나만의 ")
-                                .typography(.heading, color: ColorPalette.Content.Primary)
+                                .typography(.heading, color: .content.primary)
                             Text("목표 공부량")
-                                .typography(.heading, color: ColorPalette.Accent.Primary)
+                                .typography(.heading, color: .accent.primary)
                         }
                     }
                 }
                 VStack(spacing: 0) {
                     Text("피커와 함께 목표를 정하고")
-                        .typography(.label, color: ColorPalette.Content.Tertiary)
+                        .typography(.label, color: .content.tertiary)
                     Text("그 목표를 매일 매일 채워가보아요")
-                        .typography(.label, color: ColorPalette.Content.Tertiary)
+                        .typography(.label, color: .content.tertiary)
                 }
             }
         }

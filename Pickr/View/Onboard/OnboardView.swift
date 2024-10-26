@@ -23,7 +23,7 @@ struct Progress: View {
             ForEach(1...5, id: \.self) {
                 Rectangle()
                     .frame(width: $0 == order ? 24 : 9, height: 9)
-                    .foregroundColor($0 == order ? ColorPalette.Accent.Primary : ColorPalette.Background.Tertiary)
+                    .foregroundColor($0 == order ? .accent.primary : .background.tertiary)
                     .cornerRadius(40)
             }
         }
@@ -46,19 +46,19 @@ struct OnboardView: View {
                 Button(action: dynamicButtonAction(for: step)) {
                     HStack(spacing: 8) {
                         Text(step == .login ? "로그인" : "다음")
-                            .typography(.headlineEmphasized, color: ColorPalette.Content.Primary)
+                            .typography(.headlineEmphasized, color: .content.primary)
                         Image("arrow_forward")
                             .renderingMode(.template)
-                            .foregroundColor(.Content.primary)
+                            .foregroundColor(.content.primary)
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
                 }
                 .frame(maxWidth: .infinity, maxHeight: 58)
-                .background(ColorPalette.Accent.Transparent)
+                .background(Color.accent.transparent)
                 .overlay(
                     Rectangle()
                         .frame(height: 2)
-                        .foregroundColor(ColorPalette.Accent.Primary),
+                        .foregroundColor(.accent.primary),
                     alignment: .bottom
                 )
             }

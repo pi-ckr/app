@@ -20,7 +20,7 @@ struct OnboardLogin: View {
                     VStack(spacing: 20) {
                         Image("logo_long")
                         Text("내 맘대로 픽해서 공부하는 영단어")
-                            .typography(.headline, color: ColorPalette.Content.Secondary)
+                            .typography(.headline, color: .content.secondary)
                     }
                 }
                 
@@ -79,12 +79,12 @@ struct LoginInput: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(label)
-                .typography(.labelEmphasized, color: ColorPalette.Content.Primary)
+                .typography(.labelEmphasized, color: .content.primary)
             
             ZStack(alignment: .leading) {
                 if text.isEmpty {
                     Text(placeholder)
-                        .typography(.label, color: ColorPalette.Content.Invert)
+                        .typography(.label, color: .content.invert)
                         .padding(14)
                 }
 
@@ -96,20 +96,20 @@ struct LoginInput: View {
                                 .padding(.trailing, 34)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 4)
-                                        .stroke(isFocused ? ColorPalette.Accent.Primary : Color.clear, lineWidth: 1.5)
+                                        .stroke(isFocused ? .accent.primary : Color.clear, lineWidth: 1.5)
                                         .animation(.easeInOut(duration: 0.2), value: isFocused))
                                 .focused($isFocused)
-                                .typography(.label, color: ColorPalette.Content.Primary)
+                                .typography(.label, color: .content.primary)
                         } else {
                             SecureField("", text: $text)
                                 .padding(14)
                                 .padding(.trailing, 34)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 4)
-                                        .stroke(isFocused ? ColorPalette.Accent.Primary : Color.clear, lineWidth: 1.5)
+                                        .stroke(isFocused ? .accent.primary : Color.clear, lineWidth: 1.5)
                                         .animation(.easeInOut(duration: 0.2), value: isFocused))
                                 .focused($isFocused)
-                                .typography(.label, color: ColorPalette.Content.Primary)
+                                .typography(.label, color: .content.primary)
                         }
 
                         // 눈 아이콘
@@ -117,7 +117,7 @@ struct LoginInput: View {
                             .renderingMode(.template)
                             .resizable()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(ColorPalette.Content.Invert)
+                            .foregroundColor(.content.invert)
                             .onTapGesture {
                                 withAnimation {
                                     isOpened.toggle()
@@ -129,10 +129,10 @@ struct LoginInput: View {
                             .padding(14)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 4)
-                                    .stroke(isFocused ? ColorPalette.Accent.Primary : Color.clear, lineWidth: 1.5)
+                                    .stroke(isFocused ? .accent.primary : Color.clear, lineWidth: 1.5)
                                     .animation(.easeInOut(duration: 0.2), value: isFocused))
                             .focused($isFocused)
-                            .typography(.label, color: ColorPalette.Content.Primary)
+                            .typography(.label, color: .content.primary)
                     }
                 }
             }
