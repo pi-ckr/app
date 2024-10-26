@@ -1,11 +1,19 @@
 //
+//  RoundedCorner.swift
+//  Pickr
+//
+//  Created by  jwkwon0817 on 10/3/24.
+//
+
+
+//
 //  CornerRadius.swift
 //  Vedge
 //
 //  Created by 주현명 on 10/3/24.
 //
 
-import SwiftUI
+import SwiftUI 
 
 struct RoundedCorner: Shape {
     

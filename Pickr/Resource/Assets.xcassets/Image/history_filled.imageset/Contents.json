@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "history_filled.svg",
       "idiom" : "universal"
     }
   ],
