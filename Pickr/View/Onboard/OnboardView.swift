@@ -8,22 +8,22 @@
 import SwiftUI
 
 enum OnboardStep {
-    case first, second, third, login
+    case first, second, third
 }
 
 struct Progress: View {
     let order: Int
 
     init(order: Int) {
-        self.order = max(1, min(order, 5))
+        self.order = max(1, min(order, 3))
     }
     
     var body: some View {
         HStack(spacing: 6) {
-            ForEach(1...5, id: \.self) {
+            ForEach(1...3, id: \.self) {
                 Rectangle()
-                    .frame(width: $0 == order ? 24 : 9, height: 9)
-                    .foregroundColor($0 == order ? .accent.primary : .background.tertiary)
+                    .frame(width: $0 == order ? 24 : 8, height: 8)
+                    .foregroundColor($0 == order ? .accent.primary : .border.secondary)
                     .cornerRadius(40)
             }
         }
@@ -32,40 +32,62 @@ struct Progress: View {
 }
 
 struct OnboardView: View {
-    @State private var step: OnboardStep = .first
+    @StateObject private var viewModel: OnboardViewModel
     
+    init(mainViewModel: MainViewModel) {
+        _viewModel = StateObject(wrappedValue: OnboardViewModel(mainViewModel: mainViewModel))
+    }
     
     var body: some View {
-        VStack {
-            dynamicContent(for: step)
-                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                .animation(.easeInOut, value: step)
+        VStack(spacing: 47) {
             Spacer()
-            VStack(spacing: 32) {
-                Progress(order: dynamicOrder(for: step))
-                Button(action: dynamicButtonAction(for: step)) {
-                    HStack(spacing: 8) {
-                        Text(step == .login ? "로그인" : "다음")
-                            .typography(.headlineEmphasized, color: .content.primary)
-                        Image("arrow_forward")
+            VStack {
+                VStack(spacing: 70) {
+                    ZStack {
+                        Image(dynamicIcon(for: viewModel.step))
                             .renderingMode(.template)
                             .foregroundColor(.content.primary)
+                        }
+                        .transition(
+                            .asymmetric(
+                                insertion: .opacity.combined(with: .offset(x: 10)),
+                                removal: .opacity.combined(with: .offset(x: -10))
+                            )
+                        )
+                        .animation(.smooth(duration: 0.4), value: viewModel.step)
+                        .id(viewModel.step)
+                    VStack(alignment: .leading, spacing: 24) {
+                        Progress(order: viewModel.getOrder())
+                        dynamicContent(for: viewModel.step)
+                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading).combined(with: .opacity)))
+                            .animation(.smooth(duration: 0.4), value: viewModel.step)
                     }
-                    .frame(maxWidth: .infinity, alignment: .center)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 20)
                 }
-                .frame(maxWidth: .infinity, maxHeight: 58)
-                .background(Color.accent.transparent)
-                .overlay(
-                    Rectangle()
-                        .frame(height: 2)
-                        .foregroundColor(.accent.primary),
-                    alignment: .bottom
-                )
             }
-            .padding(.bottom, 21)
+            .frame(maxWidth: .infinity)
+            Button(action: viewModel.moveToNextStep) {
+                HStack(spacing: 8) {
+                    Text("스킵해보던가ㅋ")
+                        .typography(.headline, color: Color(hex: "#FFFFFF", alpha: 0.6))
+                    Spacer()
+                    Text("계속 알아보기")
+                        .typography(.title, color: Color("System/White"))
+                    Image("Icon/arrow_forward")
+                        .renderingMode(.template)
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(Color("System/White"))
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+            }
+            .padding(.horizontal, 20)
+            .padding(.vertical, 21)
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .background(Color.accent.primary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.horizontal, 24)
     }
     
     @ViewBuilder
@@ -77,34 +99,21 @@ struct OnboardView: View {
             OnboardSecond()
         case .third:
             OnboardThird()
-        case .login:
-            OnboardLogin()
         }
     }
     
-    func dynamicOrder(for step: OnboardStep) -> Int {
-        let dict: [OnboardStep: Int] = [.first: 1, .second: 2, .third: 3, .login: 4]
-        return dict[step] ?? 1
-    }
-    
-    func dynamicButtonAction(for step: OnboardStep) -> () -> Void {
-        return {
-            withAnimation {
-                switch step {
-                case .first:
-                    self.step = .second
-                case .second:
-                    self.step = .third
-                case .third:
-                    self.step = .login
-                case .login:
-                    self.step = .first
-                }
-            }
+    func dynamicIcon(for step: OnboardStep) -> String {
+        switch step {
+        case .first:
+            return "Cursor"
+        case .second:
+            return "Calendar"
+        case .third:
+            return "Robot"
         }
     }
 }
- 
+
 #Preview {
-    OnboardView()
+    OnboardFirst()
 }

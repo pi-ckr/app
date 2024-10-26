@@ -76,8 +76,8 @@ enum ContentColors {
 
 enum BorderColors {
     static let primary = Color(light: Color("Grayscale/150"), dark: Color("Grayscale/600"))
-    static let invert = Color(light: Color("Grayscale/200"), dark: Color("Grayscale/400"))
-    static let basic = Color(light: Color("Grayscale/300"), dark: Color("Grayscale/300"))
+    static let secondary = Color(light: Color("Grayscale/200"), dark: Color("Grayscale/400"))
+    static let tertiary = Color(light: Color("Grayscale/300"), dark: Color("Grayscale/300"))
 }
 
 enum AccentColors {

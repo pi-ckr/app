@@ -9,30 +9,21 @@ import SwiftUI
 
 struct OnboardThird: View {
     var body: some View {
-        VStack {
-            VStack(spacing: 24) {
-                VStack(spacing: 30) {
-                    Image("logo")
-                    VStack(spacing: 0) {
-                        Text("언제나 함께하는")
-                            .typography(.heading, color: .background.primary)
-                        HStack(spacing: 0) {
-                            Text("인공지능 ")
-                                .typography(.heading, color: .blue)
-                            Text("도우미")
-                                .typography(.heading, color: .blue)
-                        }
-                    }
-                }
-                VStack(spacing: 0) {
-                    Text("피커 AI로 픽한 단어를")
-                        .typography(.label, color: .blue)
-                    Text("꾸준히 복습해보아요")
-                        .typography(.label, color: .blue)
+        VStack(alignment: .leading, spacing: 16) {
+            VStack(spacing: 0) {
+                Text("언제나 함께하는")
+                    .typography(.heading, color: .content.primary)
+                HStack(spacing: 0) {
+                    Text("인공지능 ")
+                        .typography(.heading, color: Color("System/White"))
+                        .background(Color.accent.primary)
+                    Text("도우미")
+                        .typography(.heading, color: .content.primary)
                 }
             }
+            Text("목표를 정하고 그 목표를 매일 매일 채워가보아요")
+                .typography(.label, color: .content.secondary)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
     }
 }
 
