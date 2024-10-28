@@ -3,12 +3,15 @@ import SwiftUI
 @main
 struct PickrApp: App {
     init() {
-        Thread.sleep(forTimeInterval: 3)
+        Thread.sleep(forTimeInterval: 1)
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(BottomBar.ViewModel())
+                .environmentObject(ContentView.ViewModel())
+                .environmentObject(OnboardView.ViewModel(thirdStepAction: {}))
         }
     }
 }

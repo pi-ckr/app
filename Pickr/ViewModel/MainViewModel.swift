@@ -8,12 +8,14 @@
 
 import SwiftUI
 
-class MainViewModel: ObservableObject {
-    @Published var isShowingOnboard: Bool = true
-    
-    func hideOnboard() {
-        if isShowingOnboard {
-            isShowingOnboard = false
+extension ContentView {
+    class ViewModel: ObservableObject {
+        @Published var isShowingOnboard: Bool = true
+        
+        func hideOnboard() {
+            if isShowingOnboard {
+                isShowingOnboard = false
+            }
         }
     }
 }

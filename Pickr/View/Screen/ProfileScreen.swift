@@ -46,23 +46,22 @@ struct ProfileScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ZStack {
-                Color.background.primary.ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                VStack {
+                    Image("Logo/blue")
+                        .renderingMode(.template)
+                        .foregroundColor(.accent.primary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 20)
                 
-                VStack(spacing: 0) {
-                    VStack {
-                        Image("Logo/blue")
-                            .renderingMode(.template)
-                            .foregroundColor(.accent.primary)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 20)
-                    
-                    ScrollView(.vertical, showsIndicators: false) {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 0) {
                         VStack(spacing: 27) {
                             VStack(alignment: .leading, spacing: 11) {
-                                Text("프로필 스크린")
+                                Text("오늘의 프로필")
                                     .typography(.heading, color: .content.primary)
                                 HStack {
                                     ContainerView {
@@ -232,12 +231,13 @@ struct ProfileScreen: View {
                         .background(Color.background.tertiary)
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .background(Color.background.primary)
     }
 }
 
 #Preview {
-    HomeScreen()
+    ProfileScreen()
 }

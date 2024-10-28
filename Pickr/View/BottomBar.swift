@@ -1,11 +1,7 @@
 import SwiftUI
 
 struct BottomBar: View {
-    @ObservedObject private var viewModel: BottomBarViewModel
-    
-    init(viewModel: BottomBarViewModel) {
-        self.viewModel = viewModel
-    } 
+    @EnvironmentObject private var viewModel: ViewModel
     
     var body: some View {
             HStack(spacing: 0) {
@@ -75,5 +71,5 @@ struct BottomBar: View {
 }
 
 #Preview {
-    HomeScreen()
+    BottomBar()
 }

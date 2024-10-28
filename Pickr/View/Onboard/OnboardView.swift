@@ -32,11 +32,14 @@ struct Progress: View {
 }
 
 struct OnboardView: View {
-    @StateObject private var viewModel: OnboardViewModel
+    @StateObject var viewModel: ViewModel
+    @EnvironmentObject var mainViewModel: ContentView.ViewModel
     
-    init(mainViewModel: MainViewModel) {
-        _viewModel = StateObject(wrappedValue: OnboardViewModel(mainViewModel: mainViewModel))
+    init(thirdStepAction: @escaping () -> Void) {
+        // thirdStepAction을 직접 클로저로 전달
+        _viewModel = StateObject(wrappedValue: ViewModel(thirdStepAction: thirdStepAction))
     }
+
     
     var body: some View {
         VStack(spacing: 47) {
@@ -67,25 +70,27 @@ struct OnboardView: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            Button(action: viewModel.moveToNextStep) {
-                HStack(spacing: 8) {
-                    Text("스킵해보던가ㅋ")
-                        .typography(.headline, color: Color(hex: "#FFFFFF", alpha: 0.6))
-                    Spacer()
-                    Text("계속 알아보기")
-                        .typography(.title, color: Color("System/White"))
-                    Image("Icon/arrow_forward")
-                        .renderingMode(.template)
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(Color("System/White"))
+            VStack(spacing: 0) {
+                    Button(action: viewModel.moveToNextStep) {
+                        HStack(spacing: 8) {
+                            Text("스킵해보던가ㅋ")
+                                .typography(.headline, color: Color(hex: "#FFFFFF", alpha: 0.6))
+                            Spacer()
+                            Text("계속 알아보기")
+                                .typography(.title, color: Color("System/White"))
+                            Image("Icon/arrow_forward")
+                                .renderingMode(.template)
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(Color("System/White"))
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 21)
+                    }
                 }
-                .frame(maxWidth: .infinity, alignment: .center)
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 21)
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .background(Color.accent.primary)
+                .background(Color.accent.primary)
+                .ignoresSafeArea(.container, edges: .bottom)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -115,5 +120,6 @@ struct OnboardView: View {
 }
 
 #Preview {
-    OnboardFirst()
+    OnboardView(thirdStepAction: {})
+        .environmentObject(ContentView.ViewModel())
 }
