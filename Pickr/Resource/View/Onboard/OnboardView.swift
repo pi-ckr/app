@@ -73,8 +73,14 @@ struct OnboardView: View {
             VStack(spacing: 0) {
                     Button(action: viewModel.moveToNextStep) {
                         HStack(spacing: 8) {
-                            Text("스킵해보던가ㅋ")
-                                .typography(.headline, color: Color(hex: "#FFFFFF", alpha: 0.6))
+                            Button(action: {
+                                withAnimation {
+                                    mainViewModel.hideOnboard()
+                                }
+                            }) {
+                                Text("스킵하기")
+                                    .typography(.headline, color: Color(hex: "#ffffff", alpha: 0.6))
+                            }
                             Spacer()
                             Text("계속 알아보기")
                                 .typography(.title, color: Color("System/White"))
@@ -87,10 +93,12 @@ struct OnboardView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 21)
+                        
                     }
+                    .ignoresSafeArea(.container, edges: .bottom)
                 }
                 .background(Color.accent.primary)
-                .ignoresSafeArea(.container, edges: .bottom)
+                .ignoresSafeArea(.all, edges: .bottom)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

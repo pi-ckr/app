@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "kid_star.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

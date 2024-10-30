@@ -64,7 +64,7 @@ enum BackgroundColors {
     static let primary = Color(light: Color("Grayscale/0"), dark: Color("Grayscale/900"))
     static let secondary = Color(light: Color("Grayscale/50"), dark: Color("Grayscale/800"))
     static let tertiary = Color(light: Color("Grayscale/100"), dark: Color("Grayscale/700"))
-    static let quaternary = Color(light: Color("Grayscale/300"), dark: Color("Grayscale/600"))
+    static let quaternary = Color(light: Color("Grayscale/200"), dark: Color("Grayscale/600"))
 }
 
 enum ContentColors {

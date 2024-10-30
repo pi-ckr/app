@@ -4,6 +4,10 @@ struct BottomBar: View {
     @EnvironmentObject private var viewModel: ViewModel
     
     var body: some View {
+//        ZStack {
+//            Rectangle()
+//                .fill(.red)
+//                .frame(width: 300, height: 60)
             HStack(spacing: 0) {
                 ForEach(viewModel.tabs, id: \.self) { tab in
                     Button(action: {
@@ -55,21 +59,42 @@ struct BottomBar: View {
                 , alignment: .top
             )
             .frame(minWidth: 0, maxWidth: .infinity)
-            .background {
-                TransparentBlurView(removeAllFilters: true)
-                    .blur(radius: 24, opaque: true)
-                    .background(Color.etc.bottomNavigationBar)
-                    .ignoresSafeArea(.all, edges: .bottom)
-            }
+            .background(.ultraThinMaterial)
+//                TransparentBlurView(removeAllFilters: true)
+//                    .blur(radius: 24, opaque: true)
+//                    .background(Color.etc.bottomNavigationBar)
+//                    .ignoresSafeArea(.all, edges: .bottom)
+//            }
+            .background(Color.etc.bottomNavigationBar.opacity(0))
             .shadow(
                 color: Color.etc.bottomNavigationBarShadow,
                 radius: 10,
                 x: 0,
                 y: -4
             )
+//        }
+    }
+}
+
+struct BottomBarModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content.overlay {
+            VStack {
+                Spacer()
+                BottomBar()
+            }
+            .zIndex(99)
+        }
+    }
+}
+
+extension View {
+    func hasBottomBar() -> some View {
+        self.modifier(BottomBarModifier())
     }
 }
 
 #Preview {
     BottomBar()
+        .environmentObject(BottomBar.ViewModel())
 }

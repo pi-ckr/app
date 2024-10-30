@@ -12,6 +12,7 @@ struct PickrApp: App {
                 .environmentObject(BottomBar.ViewModel())
                 .environmentObject(ContentView.ViewModel())
                 .environmentObject(OnboardView.ViewModel(thirdStepAction: {}))
+                .environmentObject(BottomSheetViewModel())
         }
     }
 }

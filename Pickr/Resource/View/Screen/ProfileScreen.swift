@@ -46,7 +46,6 @@ struct ProfileScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            
             VStack(spacing: 0) {
                 VStack {
                     Image("Logo/blue")
@@ -195,7 +194,7 @@ struct ProfileScreen: View {
                                 Text("\(words.count)")
                                     .typography(.title, color: .accent.primary)
                             }
-                            .frame(width: .infinity)
+                            .frame(maxWidth: .infinity)
                             
                             VStack(spacing: 4) {
                                 ForEach(0..<(words.count + 1) / 2, id: \.self) { row in

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct VocabularyScreen: View {
+struct HistoryScreen: View {
     let history = [
        [4, 15, 28, 12, 7, 22, 35],
        [18, 3, 31, 9, 25, 14, 29],
@@ -61,7 +61,7 @@ struct VocabularyScreen: View {
                     VStack(spacing: 0) {
                         VStack(spacing: 27) {
                             VStack(alignment: .leading, spacing: 11) {
-                                Text("오늘의 단어장")
+                                Text("오늘의 기록")
                                     .typography(.heading, color: .content.primary)
                                 HStack {
                                     ContainerView {
@@ -195,7 +195,7 @@ struct VocabularyScreen: View {
                                 Text("\(words.count)")
                                     .typography(.title, color: .accent.primary)
                             }
-                            .frame(width: .infinity)
+                            .frame(maxWidth: .infinity)
                             
                             VStack(spacing: 4) {
                                 ForEach(0..<(words.count + 1) / 2, id: \.self) { row in
@@ -239,5 +239,5 @@ struct VocabularyScreen: View {
 }
 
 #Preview {
-    VocabularyScreen()
+    HistoryScreen()
 }
