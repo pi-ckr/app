@@ -3,7 +3,21 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var viewModel = ViewModel()
     @EnvironmentObject var bottomBarViewModel: BottomBar.ViewModel
-    @EnvironmentObject var bottomSheetViewModel: BottomSheetViewModel
+   
+    func currentTab() -> any View {
+        switch (bottomBarViewModel.selectedTab) {
+        case .home:
+            return HomeScreen()
+        case .vocabulary:
+            return VocabularyScreen()
+        case .study:
+            return StudyScreen()
+        case .history:
+            return HistoryScreen()
+        case .profile:
+            return ProfileScreen()
+        }
+    }
     
     var body: some View {
         if viewModel.isShowingOnboard {
@@ -11,33 +25,14 @@ struct ContentView: View {
                 viewModel.hideOnboard()
             }).environmentObject(viewModel)
         } else {
-                TabView(selection: $bottomBarViewModel.selectedTab.animation(.none)) {
-                    Group {
-                        HomeScreen()
-                            .tag(Tab.home)
-                        
-                        VocabularyScreen()
-                            .tag(Tab.vocabulary)
-                        
-                        StudyScreen()
-                            .tag(Tab.study)
-                        
-                        HistoryScreen()
-                            .tag(Tab.history)
-                        
-                        ProfileScreen()
-                            .tag(Tab.profile)
-                    }
-                }
+            ZStack {
+                AnyView(currentTab())
                 
-                .toolbar(.hidden, for: .tabBar)
-                .animation(nil, value:  bottomBarViewModel.selectedTab)
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .ignoresSafeArea(.all)
-                .hasBottomBar()
-                .bottomSheet(isShowing: $bottomSheetViewModel.studySheet) {
-                    StudyBottomSheet() 
+                VStack {
+                    Spacer()
+                    BottomBar()
                 }
+            }
         }
     }
 }
@@ -47,5 +42,4 @@ struct ContentView: View {
         .environmentObject(ContentView.ViewModel())
         .environmentObject(OnboardView.ViewModel(thirdStepAction: {}))
         .environmentObject(BottomBar.ViewModel())
-        .environmentObject(BottomSheetViewModel())
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StudyScreen: View {
-    @EnvironmentObject var bottomSheetViewModel: BottomSheetViewModel
+    @State var showSheet: Bool = false
     
     var body: some View {
         ScreenTemplate(titleBar: {
@@ -40,7 +40,8 @@ struct StudyScreen: View {
                         Spacer()
                         
                         Button(action: {
-                            bottomSheetViewModel.studySheet.toggle()
+//                            bottomSheetViewModel.studySheet.toggle()
+                            showSheet.toggle()
                         }) {
                             Text("변경")
                                 .typography(.labelEmphasized, color: .content.primary)
@@ -77,14 +78,16 @@ struct StudyScreen: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 116)
             }
-            
+        }
+        .bottomSheet(isShowing: $showSheet) {
+            StudyBottomSheet(showSheet: $showSheet)
         }
     }
 }
 
 struct StudyBottomSheet: View {
     @EnvironmentObject var bottomBarViewModel: BottomBar.ViewModel
-    @EnvironmentObject var bottomSheetViewModel: BottomSheetViewModel
+    @Binding var showSheet: Bool
     
     @State private var scrollId = UUID()
     
@@ -143,7 +146,7 @@ struct StudyBottomSheet: View {
         .presentationDragIndicator(.hidden)
         .onChange(of: bottomBarViewModel.selectedTab) { _, _ in
             scrollId = UUID()
-            bottomSheetViewModel.studySheet = false
+            showSheet = false
         }
     }
 }
@@ -153,5 +156,4 @@ struct StudyBottomSheet: View {
         .environmentObject(ContentView.ViewModel())
         .environmentObject(OnboardView.ViewModel(thirdStepAction: {}))
         .environmentObject(BottomBar.ViewModel())
-        .environmentObject(BottomSheetViewModel())
 }

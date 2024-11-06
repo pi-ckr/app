@@ -238,5 +238,9 @@ struct ProfileScreen: View {
 }
 
 #Preview {
-    ProfileScreen()
+    ContentView()
+        .environmentObject(ContentView.ViewModel())
+        .environmentObject(OnboardView.ViewModel(thirdStepAction: {}))
+        .environmentObject(BottomBar.ViewModel())
 }
+

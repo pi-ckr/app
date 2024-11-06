@@ -81,9 +81,10 @@ struct OnboardView: View {
                                 Text("스킵하기")
                                     .typography(.headline, color: Color(hex: "#ffffff", alpha: 0.6))
                             }
-                            Spacer()
-                            Text("계속 알아보기")
+                            Spacer() 
+                            Text(viewModel.step == .third ? "시작하기" : "계속 알아보기")
                                 .typography(.title, color: Color("System/White"))
+                                .animation(.none, value: viewModel.step)
                             Image("Icon/arrow_forward")
                                 .renderingMode(.template)
                                 .resizable()
