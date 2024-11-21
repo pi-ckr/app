@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E4DFC5362CE1C4DE005B78F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E4DFC5352CE1C4DE005B78F3 /* Alamofire */; };
+		E4FA82E42CEEF02900A94A47 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E4FA82E32CEEF02900A94A47 /* Lottie */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E4E6074D2CAD773600757797 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -22,6 +27,19 @@
 			remoteInfo = Pickr;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E4F6DA742CE1CC41000629B3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E4E6073B2CAD773500757797 /* Pickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4DFC5362CE1C4DE005B78F3 /* Alamofire in Frameworks */,
+				E4FA82E42CEEF02900A94A47 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +135,7 @@
 				E4E607372CAD773500757797 /* Sources */,
 				E4E607382CAD773500757797 /* Frameworks */,
 				E4E607392CAD773500757797 /* Resources */,
+				E4F6DA742CE1CC41000629B3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,8 +145,6 @@
 				E4E6073D2CAD773500757797 /* Pickr */,
 			);
 			name = Pickr;
-			packageProductDependencies = (
-			);
 			productName = Pickr;
 			productReference = E4E6073B2CAD773500757797 /* Pickr.app */;
 			productType = "com.apple.product-type.application";
@@ -147,8 +166,6 @@
 				E4E6074F2CAD773600757797 /* PickrTests */,
 			);
 			name = PickrTests;
-			packageProductDependencies = (
-			);
 			productName = PickrTests;
 			productReference = E4E6074C2CAD773600757797 /* PickrTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -170,8 +187,6 @@
 				E4E607592CAD773600757797 /* PickrUITests */,
 			);
 			name = PickrUITests;
-			packageProductDependencies = (
-			);
 			productName = PickrUITests;
 			productReference = E4E607562CAD773600757797 /* PickrUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -208,6 +223,10 @@
 			);
 			mainGroup = E4E607322CAD773500757797;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E4DFC5342CE1C4DE005B78F3 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E4FA82E22CEEF02900A94A47 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E4E6073C2CAD773500757797 /* Products */;
 			projectDirPath = "";
@@ -284,6 +303,8 @@
 /* Begin XCBuildConfiguration section */
 		E4E6075E2CAD773600757797 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = E4E6073D2CAD773500757797 /* Pickr */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -345,6 +366,8 @@
 		};
 		E4E6075F2CAD773600757797 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = E4E6073D2CAD773500757797 /* Pickr */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -614,6 +637,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E4DFC5342CE1C4DE005B78F3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.1;
+			};
+		};
+		E4FA82E22CEEF02900A94A47 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E4DFC5352CE1C4DE005B78F3 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4DFC5342CE1C4DE005B78F3 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		E4FA82E32CEEF02900A94A47 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4FA82E22CEEF02900A94A47 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E4E607332CAD773500757797 /* Project object */;
 }

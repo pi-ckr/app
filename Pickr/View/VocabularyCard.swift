@@ -9,17 +9,27 @@ import SwiftUI
 
 struct VocabularyCard: View {
     var text: String = ""
+    var words: [Word] = []
     var filled: Bool = true
     
     var backgroundColor: Color?
     
+    @EnvironmentObject var viewModel: WordViewModel
+    
     var body: some View {
         HStack {
             HStack(spacing: 9) {
-                Image("Icon/Filled/star")
-                    .renderingMode(.template)
-                    .foregroundColor(filled ? .accent.primary : .content.secondary)
-                    .frame(width: 24, height: 24)
+                Button(action: {
+                    Task {
+                        let response = try await WordService.changeFavoriteVocabulary(text, favorite: !filled)
+                        
+                        viewModel.fetchVocabularyList()
+                        
+                        print(response)
+                    }
+                }) {
+                    Icon(name: "Icon/Filled/star", color: filled ? .accent.primary : .content.secondary)
+                }
                 
                 Text(text)
                     .typography(.label, color: .content.primary)
@@ -27,7 +37,7 @@ struct VocabularyCard: View {
             
             Spacer()
             
-            Text("3")
+            Text("\(words.count)")
                 .typography(.label, color: .accent.primary)
         }
         .frame(maxWidth: .infinity)
@@ -40,4 +50,5 @@ struct VocabularyCard: View {
 
 #Preview {
     VocabularyCard()
+        .environmentObject(WordViewModel())
 }

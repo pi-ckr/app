@@ -15,6 +15,7 @@ struct ScreenTemplate<Content: View>: View {
     
     @ViewBuilder var content: () -> Content
     @EnvironmentObject var bottomBarViewModel: BottomBar.ViewModel
+    @EnvironmentObject var wordViewModel: WordViewModel
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -32,6 +33,10 @@ struct ScreenTemplate<Content: View>: View {
                             
                             content()
                         }
+                    }
+                    .refreshable {
+                        wordViewModel.fetchVocabularyList()
+                        wordViewModel.fetchWords()
                     }
                     .onChange(of: bottomBarViewModel.selectedTab) { oldValue, newValue in
                         scrollProxy.scrollTo("ScreenTemplate-Top")
@@ -55,6 +60,8 @@ struct ScreenTemplate<Content: View>: View {
 #Preview {
     ContentView()
         .environmentObject(ContentView.ViewModel())
-        .environmentObject(OnboardView.ViewModel(thirdStepAction: {}))
+        .environmentObject(OnboardView.ViewModel(loginStepAction: {}))
         .environmentObject(BottomBar.ViewModel())
+        .environmentObject(AuthViewModel())
+        .environmentObject(WordViewModel())
 }

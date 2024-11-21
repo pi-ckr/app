@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum OnboardStep {
-    case first, second, third
+    case first, second, third, login
 }
 
 struct Progress: View {
@@ -34,10 +34,11 @@ struct Progress: View {
 struct OnboardView: View {
     @StateObject var viewModel: ViewModel
     @EnvironmentObject var mainViewModel: ContentView.ViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
-    init(thirdStepAction: @escaping () -> Void) {
+    init(loginStepAction: @escaping () -> Void) {
         // thirdStepAction을 직접 클로저로 전달
-        _viewModel = StateObject(wrappedValue: ViewModel(thirdStepAction: thirdStepAction))
+        _viewModel = StateObject(wrappedValue: ViewModel(loginStepAction: loginStepAction))
     }
 
     
@@ -71,7 +72,13 @@ struct OnboardView: View {
             }
             .frame(maxWidth: .infinity)
             VStack(spacing: 0) {
-                    Button(action: viewModel.moveToNextStep) {
+                Button(action: {
+                    if viewModel.step == .third {
+                        authViewModel.login(username: "dlfjstizlzl", password: "dlfjstizlzl")
+                    }
+                    
+                    viewModel.moveToNextStep()
+                }) {
                         HStack(spacing: 8) {
                             Button(action: {
                                 withAnimation {
@@ -113,7 +120,10 @@ struct OnboardView: View {
             OnboardSecond()
         case .third:
             OnboardThird()
+        case .login:
+            OnboardLogin()
         }
+        
     }
     
     func dynamicIcon(for step: OnboardStep) -> String {
@@ -124,11 +134,13 @@ struct OnboardView: View {
             return "Calendar"
         case .third:
             return "Robot"
+        case .login:
+            return "Robot"
         }
     }
 }
 
 #Preview {
-    OnboardView(thirdStepAction: {})
+    OnboardView(loginStepAction: {})
         .environmentObject(ContentView.ViewModel())
 }

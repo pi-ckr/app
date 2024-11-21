@@ -47,6 +47,6 @@ extension View {
 #Preview {
     ContentView()
         .environmentObject(ContentView.ViewModel())
-        .environmentObject(OnboardView.ViewModel(thirdStepAction: {}))
+        .environmentObject(OnboardView.ViewModel(loginStepAction: {}))
         .environmentObject(BottomBar.ViewModel())
 }

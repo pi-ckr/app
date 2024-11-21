@@ -85,7 +85,7 @@ enum AccentColors {
     static let transparent = Color(light: Color("Core/Translucent/100"), dark: Color("Core/Translucent/100"))
 }
 
-enum FillColors {
+enum FillColors { 
     static let primary = Color(light: Color("Grayscale/50"), dark: Color("Grayscale/500"))
     static let secondary = Color(light: Color("Grayscale/0"), dark: Color("Grayscale/600"))
     static let tertiary = Color(light: Color("Grayscale/300"), dark: Color("Grayscale/700"))

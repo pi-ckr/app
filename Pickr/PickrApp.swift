@@ -1,17 +1,16 @@
 import SwiftUI
+import Alamofire
 
 @main
 struct PickrApp: App {
-    init() {
-        Thread.sleep(forTimeInterval: 1)
-    }
-    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(BottomBar.ViewModel())
                 .environmentObject(ContentView.ViewModel())
-                .environmentObject(OnboardView.ViewModel(thirdStepAction: {}))
+                .environmentObject(OnboardView.ViewModel(loginStepAction: {}))
+                .environmentObject(AuthViewModel())
+                .environmentObject(WordViewModel())
         }
     }
 }

@@ -4,10 +4,10 @@ extension OnboardView {
     class ViewModel: ObservableObject {
         @Published var step: OnboardStep = .first
         
-        private let thirdStepAction: () -> Void
+        private let loginStepAction: () -> Void
             
-        init(thirdStepAction: @escaping () -> Void) {
-            self.thirdStepAction = thirdStepAction
+        init(loginStepAction: @escaping () -> Void) {
+            self.loginStepAction = loginStepAction
         }
         
         func moveToNextStep() {
@@ -18,13 +18,15 @@ extension OnboardView {
                 case .second:
                     step = .third
                 case .third:
-                    thirdStepAction()
+                    loginStepAction()
+                case .login:
+                    loginStepAction()
                 }
             }
         }
         
         func getOrder() -> Int {
-            let dict: [OnboardStep: Int] = [.first: 1, .second: 2, .third: 3]
+            let dict: [OnboardStep: Int] = [.first: 1, .second: 2, .third: 3, .login: 4]
             return dict[step] ?? 1
         }
     }

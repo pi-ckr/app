@@ -12,20 +12,20 @@ struct WordCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(word.english)
+            Text(word.word)
                 .typography(.title, color: .content.primary)
             
-            Text(word.korean)
+            Text(word.meanings[0])
                 .typography(.body, color: .content.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 13)
         .padding(.vertical, 8)
-        .cornerRadius(4)
         .background(Color.background.tertiary)
+        .cornerRadius(4)
     }
 }
 
 #Preview {
-    WordCard(word: Word(english: "practice", korean: "연습"))
+    WordCard(word: Word(id: 0, word: "practice", meanings: ["설계하다"], sampleSentence: ""))
 }

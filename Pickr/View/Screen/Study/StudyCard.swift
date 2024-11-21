@@ -30,12 +30,12 @@ struct StudyCard: View {
             HStack {
                 Image(icon)
                     .renderingMode(.template)
-                    .foregroundColor(.content.primary)
+                    .foregroundStyle(Color.fill.invert)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 180)
+        .frame(height: 196)
         .padding(20)
         .background(backgroundColor)
     }

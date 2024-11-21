@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OnboardFirst: View {
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             VStack(spacing: 0) {
