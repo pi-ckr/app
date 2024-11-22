@@ -43,14 +43,17 @@ struct OnboardView: View {
 
     
     var body: some View {
-        VStack(spacing: 47) {
-            Spacer()
-            VStack {
-                VStack(spacing: 70) {
-                    ZStack {
-                        Image(dynamicIcon(for: viewModel.step))
-                            .renderingMode(.template)
-                            .foregroundColor(.content.primary)
+        if viewModel.step == .login {
+            OnboardLogin()
+        } else {
+            VStack(spacing: 47) {
+                Spacer()
+                VStack {
+                    VStack(spacing: 70) {
+                        ZStack {
+                            Image(dynamicIcon(for: viewModel.step))
+                                .renderingMode(.template)
+                                .foregroundColor(.content.primary)
                         }
                         .transition(
                             .asymmetric(
@@ -60,35 +63,31 @@ struct OnboardView: View {
                         )
                         .animation(.smooth(duration: 0.4), value: viewModel.step)
                         .id(viewModel.step)
-                    VStack(alignment: .leading, spacing: 24) {
-                        Progress(order: viewModel.getOrder())
-                        dynamicContent(for: viewModel.step)
-                            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading).combined(with: .opacity)))
-                            .animation(.smooth(duration: 0.4), value: viewModel.step)
+                        VStack(alignment: .leading, spacing: 24) {
+                            Progress(order: viewModel.getOrder())
+                            dynamicContent(for: viewModel.step)
+                                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading).combined(with: .opacity)))
+                                .animation(.smooth(duration: 0.4), value: viewModel.step)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, 20)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 20)
                 }
-            }
-            .frame(maxWidth: .infinity)
-            VStack(spacing: 0) {
-                Button(action: {
-                    if viewModel.step == .third {
-                        authViewModel.login(username: "dlfjstizlzl", password: "dlfjstizlzl")
-                    }
-                    
-                    viewModel.moveToNextStep()
-                }) {
+                .frame(maxWidth: .infinity)
+                VStack(spacing: 0) {
+                    Button(action: {
+                        viewModel.moveToNextStep()
+                    }) {
                         HStack(spacing: 8) {
                             Button(action: {
                                 withAnimation {
-                                    mainViewModel.hideOnboard()
+                                    viewModel.step = .login
                                 }
                             }) {
                                 Text("스킵하기")
                                     .typography(.headline, color: Color(hex: "#ffffff", alpha: 0.6))
                             }
-                            Spacer() 
+                            Spacer()
                             Text(viewModel.step == .third ? "시작하기" : "계속 알아보기")
                                 .typography(.title, color: Color("System/White"))
                                 .animation(.none, value: viewModel.step)
@@ -107,8 +106,9 @@ struct OnboardView: View {
                 }
                 .background(Color.accent.primary)
                 .ignoresSafeArea(.all, edges: .bottom)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     @ViewBuilder

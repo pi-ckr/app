@@ -69,7 +69,7 @@ class KeychainHelper {
             guard status != errSecItemNotFound else {
                 print("The token was not found in keychain")
                 create(token: token, forAccount: account)
-                return false
+                return true
             }
 
             guard status == errSecSuccess else {

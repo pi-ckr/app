@@ -100,5 +100,22 @@ class WordService: WordServiceProtocol {
         return try await APIClient.shared.request("/api/history/routines?routine_date=\(date)", authRequired: true) 
     }
     
+    static func getBadge() async throws -> [BadgeResponse] {
+        return try await APIClient.shared.request("/api/badges/", authRequired: true)
+    }
+}
+
+
+struct BadgeResponse: Codable {
+    let badgeName: String
+    let rate: String
+    let description: String
+    let obtainedAt: String
     
+    enum CodingKeys: String, CodingKey {
+        case badgeName = "badge_name"
+        case rate
+        case description
+        case obtainedAt = "obtained_at"
+    }
 }

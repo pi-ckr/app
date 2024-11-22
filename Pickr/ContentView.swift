@@ -21,17 +21,22 @@ struct ContentView: View {
         }
     }
     
-    @State var isShowingSplash: Bool = true
+    @State var isShowingSplash: Bool = false
     
-    var body: some View {
-        if isShowingSplash {
-            LottieView(animation: .named("pickr"))
-                .playing()
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        isShowingSplash = false
-                    } 
-                }
+    var body: some View { 
+        if isShowingSplash { 
+            ZStack {
+                Color.black
+                    .ignoresSafeArea()
+                
+                LottieView(animation: .named("pickr"))
+                    .playing()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            isShowingSplash = false
+                        }
+                    }
+            }
         } else {
             if viewModel.isShowingOnboard {
                 OnboardView(loginStepAction: {
@@ -52,8 +57,8 @@ struct ContentView: View {
                         viewModel.hideOnboard()
                     }).environmentObject(viewModel)
                 }
-            }
-        }
+            } 
+        } 
     }
 }
 

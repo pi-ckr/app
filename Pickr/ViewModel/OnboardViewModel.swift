@@ -12,13 +12,13 @@ extension OnboardView {
         
         func moveToNextStep() {
             withAnimation {
-                switch step {
+                switch step { 
                 case .first:
                     step = .second
                 case .second:
                     step = .third
                 case .third:
-                    loginStepAction()
+                    step = .login 
                 case .login:
                     loginStepAction()
                 }

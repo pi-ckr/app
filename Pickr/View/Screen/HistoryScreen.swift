@@ -193,6 +193,7 @@ struct HistoryScreen: View {
                 .padding(.vertical, 12)
                 .background(Color.background.secondary)
             }
+            .padding(.bottom, 60)
         }
     }
 }

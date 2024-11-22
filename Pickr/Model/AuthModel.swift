@@ -43,3 +43,23 @@ struct MeResponse: Decodable {
         case grass
     }
 }
+
+struct SmsResponse: Decodable {
+    let successCount: Int
+    let errorCount: Int
+    let groupId: String
+    
+    enum CodingKeys: String, CodingKey {
+        case successCount = "success_count"
+        case errorCount = "error_count"
+        case groupId = "group_id"
+    }
+}
+
+struct SmsConfirmResponse: Decodable {
+    let accessKey: String
+    
+    enum CodingKeys: String, CodingKey {
+        case accessKey = "access_key"
+    }
+}

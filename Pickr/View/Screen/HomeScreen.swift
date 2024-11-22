@@ -60,7 +60,7 @@ struct HomeScreen: View {
                             Text("선택됨")
                                 .typography(.headlineEmphasized, color: .accent.primary)
                             Spacer()
-                            Text("36 / 40 단어")
+                            Text("\(viewModel.wordList.count) / 40 단어")
                                 .typography(.label, color: .content.secondary)
                         }
                         
@@ -75,7 +75,7 @@ struct HomeScreen: View {
                                 .cornerRadius(20)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 7)
-                                .scaleEffect(x: 36/40, y: 1, anchor: .leading)  // scaleEffect 사용
+                                .scaleEffect(x: Double(viewModel.wordList.count) / 40, y: 1, anchor: .leading)  // scaleEffect 사용
                         }
                     }
                     .frame(maxWidth: .infinity)

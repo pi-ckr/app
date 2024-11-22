@@ -14,6 +14,7 @@ class WordViewModel: ObservableObject {
     @Published var favoriteVocabularyList: [Vocabulary] = []
     @Published var selectedStudyVocabulary: Vocabulary? = nil
     @Published var history: HistoryResponse? = nil
+    @Published var badges: [BadgeResponse] = []
     
     @Published var error: Error?
     @Published var isLoading = false
@@ -28,6 +29,19 @@ class WordViewModel: ObservableObject {
             do {
                 let result = try await WordService.getWordList()
                 wordList = result
+            } catch {
+                self.error = error
+            }
+            isLoading = false
+        }
+    }
+    
+    func fetchBadges() {
+        isLoading = true
+        Task {
+            do {
+                let result = try await WordService.getBadge()
+                badges = result
             } catch {
                 self.error = error
             }
@@ -73,5 +87,6 @@ class WordViewModel: ObservableObject {
         fetchWords()
         fetchVocabularyList()
         fetchHistory(todayString)
+        fetchBadges()
     }
 }

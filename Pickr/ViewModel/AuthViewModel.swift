@@ -26,8 +26,7 @@ class AuthViewModel: ObservableObject {
     @Published var me: MeResponse? = nil
     
     init() {
-//        checkAuthentication()
-        
+        checkAuthentication()
     }
     
     private func checkAuthentication() {
@@ -35,6 +34,8 @@ class AuthViewModel: ObservableObject {
             isLoading = true  // 체크 시작 전 로딩 상태 true
             do {
                 let _: EmptyResponse = try await APIClient.shared.request("/api/users", authRequired: true)
+                me = try await AuthService.me()
+                
                 isAuthenticated = true
             } catch {
                 if let afError = error as? AFError,
@@ -47,12 +48,34 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func login(username: String, password: String) {
+    func login(username: String, password: String, phoneNumber: String, accessKey: String) {
         isLoading = true
         
         Task {
             do {
-                let response = try await AuthService.login(username: username, password: password)
+                let response = try await AuthService.login(username: username, password: password, phoneNumber: phoneNumber, accessKey: accessKey)
+                // 토큰 저장
+                if KeychainHelper.update(token: response.accessToken, forAccount: "accessToken") {
+                    isAuthenticated = true
+                    
+                }
+                
+                me = try await AuthService.me()
+            } catch {
+                self.error = error
+                print(error.localizedDescription)
+            }
+            
+            isLoading = false
+        }
+    }
+    
+    func signup(username: String, password: String, phoneNumber: String, accessKey: String, profilePicture: String, birthday: String) {
+        isLoading = true
+        
+        Task {
+            do {
+                let response = try await AuthService.signup(username: username, password: password, phoneNumber: phoneNumber, accessKey: accessKey, profilePicture: profilePicture, birthday: birthday)
                 // 토큰 저장
                 if KeychainHelper.update(token: response.accessToken, forAccount: "accessToken") {
                     isAuthenticated = true

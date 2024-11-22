@@ -20,13 +20,13 @@ class APIClient {
                        headers: [
                         "Content-Type": form ? "application/x-www-form-urlencoded" : "application/json",
                         "Accept": "application/json",
-                        "Authorization": authRequired ? "Bearer \(KeychainHelper.read(forAccount: "accessToken")!)" : ""
+                        "Bearer": authRequired ? "\(KeychainHelper.read(forAccount: "accessToken") ?? "")" : ""
                        ])
             .validate() // 응답 상태 코드 검증 추가
             .responseDecodable(of: T.self) { response in
                 debugPrint(response)
                 
-                switch response.result {
+                switch response.result { 
                 case .success(let data):
                     continuation.resume(returning: data)
                 case .failure(let error):
