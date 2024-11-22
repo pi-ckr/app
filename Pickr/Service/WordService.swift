@@ -108,7 +108,7 @@ class WordService: WordServiceProtocol {
 
 struct BadgeResponse: Codable {
     let badgeName: String
-    let rate: String
+    let rate: Int
     let description: String
     let obtainedAt: String
     

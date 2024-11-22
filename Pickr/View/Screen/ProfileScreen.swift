@@ -20,7 +20,7 @@ struct ProfileScreen: View {
             }, action: {
                 showDetail = true
             })
-        }) { 
+        }) {
             VStack(spacing: 4) {
                 VStack {
                     HStack(spacing: 20) {
@@ -59,67 +59,62 @@ struct ProfileScreen: View {
                                     .typography(.label, color: Color.content.primary)
                             
                                 HStack(spacing: 6) {
-                                    if let rate = Int(badge.rate) {
-                                        if rate >= 1 {
-                                            Group {
-                                                Image("Badge/bronze")
-                                            }
-                                            .frame(maxWidth: .infinity)
-                                            .frame(height: 110)
-                                            .background(Color.border.primary)
-                                        } else {
-                                            Group {
-                                                Image("Badge/bronze")
-                                                    .renderingMode(.template)
-                                                    .foregroundStyle(.clear)
-                                            }
-                                            .frame(maxWidth: .infinity)
-                                            .frame(height: 110)
-                                            .background(Color.border.primary)
+                                    if badge.rate >= 1 {
+                                        Group {
+                                            Image("Badge/bronze")
                                         }
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 110)
+                                        .background(Color.border.primary)
+                                    } else {
+                                        Group {
+                                            Image("Badge/bronze")
+                                                .grayscale(0.995)
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 110)
+                                        .background(Color.border.primary)
+                                    }
                                         
-                                        if rate >= 2 {
-                                            Group {
-                                                Image("Badge/silver")
-                                            }
-                                            .frame(maxWidth: .infinity)
-                                            .frame(height: 110)
-                                            .background(Color.border.primary)
-                                        } else {
-                                            Group {
-                                                Image("Badge/silver")
-                                                    .renderingMode(.template)
-                                                    .foregroundStyle(.clear)
-                                            }
-                                            .frame(maxWidth: .infinity)
-                                            .frame(height: 110)
-                                            .background(Color.border.primary)
+                                    if badge.rate >= 2 {
+                                        Group {
+                                            Image("Badge/silver")
                                         }
-                                        
-                                        if rate >= 3 {
-                                            Group {
-                                                Image("Badge/gold")
-                                            }
-                                            .frame(maxWidth: .infinity)
-                                            .frame(height: 110)
-                                            .background(Color.border.primary)
-                                        } else {
-                                            Group {
-                                                Image("Badge/gold")
-                                                    .renderingMode(.template)
-                                                    .foregroundStyle(.clear)
-                                            }
-                                            .frame(maxWidth: .infinity)
-                                            .frame(height: 110)
-                                            .background(Color.border.primary)
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 110)
+                                        .background(Color.border.primary)
+                                    } else {
+                                        Group {
+                                            Image("Badge/silver")
+                                                .grayscale(0.995)
                                         }
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 110)
+                                        .background(Color.border.primary)
+                                    }
+                                    
+                                    if badge.rate >= 3 {
+                                        Group {
+                                            Image("Badge/gold")
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 110)
+                                        .background(Color.border.primary)
+                                    } else {
+                                        Group {
+                                            Image("Badge/gold")
+                                                .grayscale(0.995)
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .frame(height: 110)
+                                        .background(Color.border.primary)
                                     }
                                 }
                             }
                         }
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading) 
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 24)
                 .padding(.bottom, 100)
